@@ -22,7 +22,7 @@ class Library {
         this.books = data;
       }
     } catch (error) {
-      saveToLocalStorage();
+      this.saveToLocalStorage();
     }
   }
 
