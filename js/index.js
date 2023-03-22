@@ -46,7 +46,7 @@ class Library {
       <td>
         <article class="book">
           <p>"${book.title}" by ${book.author}</p>
-          <button type="button" id="${index}" class="btn remove-btn" onclick="removeBookFromDOM(${index})">Remove</button>
+          <button type="button" id="${index}" class="btn remove-btn">Remove</button>
         </article>
       </td>
     </tr>
@@ -68,14 +68,17 @@ class Library {
   }
 }
 
+
+
 // let listBooks
 const listBooks = new Library();
 
 function removeBookFromDOM(id) {
-  if (id !== -1) {
+  if (id !== undefined) {
     listBooks.removeBook(id);
   }
 }
+
 
 const form = document.querySelector('#form');
 form.addEventListener('submit', (event) => {
@@ -86,6 +89,17 @@ form.addEventListener('submit', (event) => {
 listBooks.getDataFromLocalStorage();
 listBooks.getBooks();
 removeBookFromDOM(-1);
+
+const removeButtons = document.querySelectorAll('.btn');
+removeButtons.forEach((button) => {
+  button.addEventListener('click', () => {
+    removeBookFromDOM(button.id);
+    alert('you clicked');
+  });
+});
+
+
+
 
 // ====================== NAVIGATION =========================
 function displayTime() {
