@@ -109,7 +109,7 @@ const listMenuLink = document.querySelector('#m-list');
 const addMenuLink = document.querySelector('#m-add');
 const contactMenuLink = document.querySelector('#m-contact');
 // Get all the section
-const mainSection = document.querySelector('.main-section');
+//const mainSection = document.querySelector('.main-section');
 const sections = document.querySelectorAll('section');
 const pageTitle = document.querySelector('#page-title');
 // Menu Links
@@ -153,3 +153,15 @@ function displaySection(sectionToDisp) {
     }
   });
 }
+
+listMenuLink.addEventListener('click', () => {
+  displaySection('book-list');
+});
+
+addMenuLink.addEventListener('click', () => {
+  displaySection('add-book');
+});
+
+contactMenuLink.addEventListener('click', () => {
+  displaySection('contact');
+});
