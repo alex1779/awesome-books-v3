@@ -44,7 +44,7 @@ class Library {
       removeButton.innerText = 'Remove';
       removeButton.className = 'btn remove-btn';
       removeButton.addEventListener('click', () => {
-        this.removeBook(book.title, book.author)
+        this.removeBook(book.title, book.author);
       });
       div.textContent = `${book.title} by ${book.author}`;
       div.appendChild(removeButton);
@@ -61,7 +61,7 @@ class Library {
 
 // let listBooks
 const listBooks = new Library();
-listBooks;
+listBooks.className = 'purple';
 // ====================== NAVIGATION =========================
 function displayTime() {
   const option = {
