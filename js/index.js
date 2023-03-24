@@ -42,28 +42,26 @@ class Library {
       const div = document.createElement('div');
       const removeButton = document.createElement('button');
       removeButton.innerText = 'Remove';
-      removeButton.className ='btn remove-btn'
-        removeButton.addEventListener('click', () => {
-          this.removeBook(book.title, book.author)
-        });
-        div.textContent = `${book.title} by ${book.author}`;
-        div.appendChild(removeButton);
-        div.className = 'tr';
-        this.section.appendChild(div);
+      removeButton.className = 'btn remove-btn';
+      removeButton.addEventListener('click', () => {
+        this.removeBook(book.title, book.author)
+      });
+      div.textContent = `${book.title} by ${book.author}`;
+      div.appendChild(removeButton);
+      div.className = 'tr';
+      this.section.appendChild(div);
     });
-
-    }
-
-    clearInputs(){
-      this.title.value = "";
-      this.author.value = "";
   }
 
+  clearInputs() {
+    this.title.value = '';
+    this.author.value = '';
+  }
 }
 
 // let listBooks
 const listBooks = new Library();
-
+listBooks;
 // ====================== NAVIGATION =========================
 function displayTime() {
   const option = {
