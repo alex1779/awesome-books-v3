@@ -2,7 +2,33 @@ import Book from './class.js';
 
 class Library {
   constructor() {
-    this.books = [];
+    this.books = JSON.parse(localStorage.getItem('MY-Library')) || [];
+    this.section = document.querySelector('#book-list');
+    this.form = document.querySelector('#form');
+    this.title = document.querySelector('#title');
+    this.author = document.querySelector('#author');
+    this.addButton = document.getElementById('add-book-btn');
+
+    this.addButton.addEventListener('click', () => this.addBook());
+    this.getBooks();
+  }
+
+  addBook() {
+    const bookTitle = this.title.value;
+    const bookAuthor = this.author.value;
+    const objBook = new Book(bookTitle, bookAuthor);
+    this.books.push(objBook);
+    this.saveToLocalStorage();
+    this.getBooks();
+    this.clearInputs();
+  }
+
+  removeBook(title, author) {
+    this.books = this.books.filter(
+      (objBook) => objBook.title !== title || objBook.author !== author
+    );
+    this.saveToLocalStorage();
+    this.getBooks();
   }
 
   // Local Storage
@@ -10,36 +36,7 @@ class Library {
     localStorage.setItem('MY-Library', JSON.stringify(this.books));
   }
 
-  getDataFromLocalStorage() {
-    try {
-      const data = JSON.parse(localStorage.getItem('MY-Library'));
-      if (data !== null) {
-        this.books = data;
-      }
-    } catch (error) {
-      this.saveToLocalStorage();
-    }
-  }
-
-  addBook() {
-    const form = document.querySelector('#form');
-    const title = document.querySelector('#title');
-    const author = document.querySelector('#author');
-    const bookTitle = title.value;
-    const bookAuthor = author.value;
-
-    if (bookTitle.trim().length !== 0 && bookAuthor.trim().length !== 0) {
-      const objBook = new Book(bookTitle, bookAuthor);
-      this.books.push(objBook);
-      this.saveToLocalStorage();
-      this.getBooks();
-      form.reset();
-    }
-  }
-
-  getBooks() {
-    const section = document.querySelector('#book-list');
-    this.getDataFromLocalStorage();
+  getBooks() {/*
     let books = '<table>';
     this.books.forEach((book, index) => {
       books += `<tr>
@@ -52,51 +49,39 @@ class Library {
     </tr>
     `;
     });
+
     if (this.books.length === 0) {
       books
         += '<tr><td<p class="empty-libray">Library is empty...</p></td></tr>';
     }
-    books += '</table>';
-    section.innerHTML = books;
+    books += '</table>';*/
+    this.section.innerHTML = '';
+    this.books.forEach((book) => {
+      const div = document.createElement('div');
+      const removeButton = document.createElement('button');
+      removeButton.innerText = 'Remove';
+      removeButton.className ='btn remove-btn'
+        removeButton.addEventListener('click', () => {
+          this.removeBook(book.title, book.author)
+        });
+        div.textContent = `${book.title} by ${book.author}`;
+        div.appendChild(removeButton);
+        div.className = 'tr';
+        this.section.appendChild(div);
+    })
+     
+    }
+
+    clearInputs(){
+      this.title.value = "";
+      this.author.value = "";
   }
 
-  removeBook(bookId) {
-    const filteredBooks = this.books.filter((book, index) => bookId !== index);
-    this.books = filteredBooks;
-    this.saveToLocalStorage();
-    this.getBooks();
-  }
 }
-
-
 
 // let listBooks
 const listBooks = new Library();
 
-function removeBookFromDOM(id) {
-  if (id !== undefined) {
-    listBooks.removeBook(id);
-  }
-}
-
-
-const form = document.querySelector('#form');
-form.addEventListener('submit', (event) => {
-  event.preventDefault();
-  listBooks.addBook();
-});
-
-listBooks.getDataFromLocalStorage();
-listBooks.getBooks();
-removeBookFromDOM(-1);
-
-const removeButtons = document.querySelectorAll('.btn');
-removeButtons.forEach((button) => {
-  button.addEventListener('click', () => {
-    removeBookFromDOM(button.id);
-    alert('you clicked');
-  });
-});
 
 
 

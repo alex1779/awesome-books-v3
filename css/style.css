@@ -88,17 +88,21 @@ table {
   width: 100%;
 }
 
-td {
-  padding: 2px 5px 2px;
+.tr {
+  padding: 15px 5px 2px 1rem;
+  font-size: 15px;
+  height: 2rem;
+  display: flex;
+  flex-direction: column;
 }
 
-tr:hover {
-  font-size: 20px !important;
+.tr:hover {
+  font-size: 16px !important;
   background-color: rgb(189, 233, 189) !important;
   cursor: pointer;
 }
 
-tr:nth-child(odd) {
+.tr:nth-child(odd) {
   background-color: lightgray;
 }
 
@@ -149,10 +153,8 @@ input {
   box-shadow: 2px 2px;
   cursor: pointer;
   transition: all 2s;
-}
-
-.remove-btn {
-  margin-right: 10px;
+  margin-left: 80vw;
+  transform: translateY(-1rem);
 }
 
 .remove-btn:hover {
@@ -163,6 +165,12 @@ input {
 
 #add-book-btn {
   width: 50px;
+  margin-top: 0.5rem;
+  padding: 5px;
+  background-color: white;
+  box-shadow: 2px 2px;
+  cursor: pointer;
+  transition: all 2s;
 }
 
 #add-book-btn:hover {
