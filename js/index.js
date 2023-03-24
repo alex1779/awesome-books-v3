@@ -25,7 +25,7 @@ class Library {
 
   removeBook(title, author) {
     this.books = this.books.filter(
-      (objBook) => objBook.title !== title || objBook.author !== author
+      (objBook) => objBook.title !== title || objBook.author !== author,
     );
     this.saveToLocalStorage();
     this.getBooks();
@@ -36,25 +36,7 @@ class Library {
     localStorage.setItem('MY-Library', JSON.stringify(this.books));
   }
 
-  getBooks() {/*
-    let books = '<table>';
-    this.books.forEach((book, index) => {
-      books += `<tr>
-      <td>
-        <article class="book">
-          <p>"${book.title}" by ${book.author}</p>
-          <button type="button" id="${index}" class="btn remove-btn">Remove</button>
-        </article>
-      </td>
-    </tr>
-    `;
-    });
-
-    if (this.books.length === 0) {
-      books
-        += '<tr><td<p class="empty-libray">Library is empty...</p></td></tr>';
-    }
-    books += '</table>';*/
+  getBooks() {
     this.section.innerHTML = '';
     this.books.forEach((book) => {
       const div = document.createElement('div');
@@ -68,8 +50,8 @@ class Library {
         div.appendChild(removeButton);
         div.className = 'tr';
         this.section.appendChild(div);
-    })
-     
+    });
+
     }
 
     clearInputs(){
@@ -81,10 +63,6 @@ class Library {
 
 // let listBooks
 const listBooks = new Library();
-
-
-
-
 
 // ====================== NAVIGATION =========================
 function displayTime() {

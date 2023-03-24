@@ -82,6 +82,8 @@ nav > span {
   padding: 0;
   margin: auto;
   margin-bottom: 25%;
+  display: flex;
+  flex-direction: column;
 }
 
 table {
